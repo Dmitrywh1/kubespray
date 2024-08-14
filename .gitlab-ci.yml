@@ -1,0 +1,13 @@
+stages:
+  - deploy
+  
+variables:
+  ANSIBLE_CONFIG: "/builds/morgot/kubespray/ansible.cfg"
+
+deploy_kubespray:
+  stage: deploy
+  image: cr.yandex/crpb6jem7gml01esa824/ansible-dind:0.1
+  script:
+    - ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b
+  tags:
+    - docker
